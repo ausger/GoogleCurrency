@@ -29,7 +29,7 @@
 class Payserv_GoogleFinance_Model_Google extends Mage_Directory_Model_Currency_Import_Abstract
 {
     //protected $_url = 'http://quote.yahoo.com/d/quotes.csv?s==X&f=l1&e=.csv';
-    protected $_url = 'http://www.google.com/finance/converter?a=1&from={{CURRENCY_FROM}}&to={{CURRENCY_TO}}';
+    protected $_url = 'https://finance.google.com/finance/converter?a=1&from={{CURRENCY_FROM}}&to={{CURRENCY_TO}}';
     protected $_messages = array();
  
     protected function _convert($currencyFrom, $currencyTo, $retry=0)
