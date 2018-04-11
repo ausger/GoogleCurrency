@@ -29,7 +29,8 @@
 class Payserv_GoogleFinance_Model_Google extends Mage_Directory_Model_Currency_Import_Abstract
 {
     //protected $_url = 'http://quote.yahoo.com/d/quotes.csv?s==X&f=l1&e=.csv';
-    protected $_url = 'http://www.google.com/finance/converter?a=1&from={{CURRENCY_FROM}}&to={{CURRENCY_TO}}';
+    //protected $_url = 'http://www.google.com/finance/converter?a=1&from={{CURRENCY_FROM}}&to={{CURRENCY_TO}}';
+    protected $_url = 'https://www.xe.com/currencyconverter/convert/?Amount=1&From={{CURRENCY_FROM}}&To={{CURRENCY_TO}}';
     protected $_messages = array();
  
     protected function _convert($currencyFrom, $currencyTo, $retry=0)
@@ -51,7 +52,8 @@ class Payserv_GoogleFinance_Model_Google extends Mage_Directory_Model_Currency_I
 			$res = curl_exec($ch);
 			curl_close($ch);
 			
-			if(preg_match("'<span class=bld>([0-9\.]+)\s\w+</span>'", $res, $m))
+			if(preg_match("/<span class='uccResultAmount'>([0-9.]*)<\/span>/", $res, $m))
+				//(preg_match("'<span class=bld>([0-9\.]+)\s\w+</span>'", $res, $m))
 				$exchange_rate = $m[1];
 
 			if( !$exchange_rate ) {
